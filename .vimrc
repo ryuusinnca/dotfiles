@@ -1,6 +1,14 @@
 " vimのデフォルト設定
 set nocompatible
 
+""""""""""""""""""""""""""""
+" 自動的に閉じ括弧を入力
+""""""""""""""""""""""""""""""
+imap { {}<LEFT>
+imap [ []<LEFT>
+imap ( ()<LEFT>
+""""""""""""""""""""""""""""""
+
 " rename用のマッピングを無効にしたため、代わりにコマンドを定義
 command! -nargs=0 JediRename :call jedi#rename()
 
@@ -32,6 +40,7 @@ if has('vim_starting')
       NeoBundle 'davidhalter/jedi-vim'
       NeoBundle 'nathanaelkane/vim-indent-guides'
       NeoBundle 'w0ng/vim-hybrid'
+      NeoBundle 'scrooloose/nerdtree'
       ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
       call neobundle#end()
 

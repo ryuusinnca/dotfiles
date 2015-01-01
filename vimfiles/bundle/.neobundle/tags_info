@@ -3,6 +3,7 @@ jedi-vim
 neobundle.vim
 neocomplcache
 neosnippet
+nerdtree
 syntastic
 unite.vim
 vim-hybrid
