@@ -1,0 +1,12 @@
+VimClojure
+jedi-vim
+neobundle.vim
+neocomplcache
+neosnippet
+syntastic
+unite.vim
+vim-hybrid
+vim-indent-guides
+vim-slime
+vimproc
+vimshell
