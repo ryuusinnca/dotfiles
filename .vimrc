@@ -4,13 +4,15 @@ set nocompatible
 """"""""""""""""""""""""""""
 " 自動的に閉じ括弧を入力
 """"""""""""""""""""""""""""""
-imap { {}<LEFT>
-imap [ []<LEFT>
-imap ( ()<LEFT>
+"imap { {}<LEFT>
+"imap [ []<LEFT>
+"imap ( ()<LEFT>
 """"""""""""""""""""""""""""""
 
 " rename用のマッピングを無効にしたため、代わりにコマンドを定義
 command! -nargs=0 JediRename :call jedi#rename()
+" python buildコマンド
+command! PythonBuild :!command python %
 
 " pythonのrename用のマッピングがquickrunとかぶるため回避させる
 " let g:jedi#rename_command = ""
@@ -23,30 +25,50 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=248
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1
 
+" pyflake settings
+let g:PyFlakeOnWrite = 1
+let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes'
+let g:PyFlakeDefaultComplexity=10
+
+" indentLine settings
+let g:indentLine_color_term = 111
+let g:indentLine_color_gui = '#708090'
+let g:indentLine_char = '' "use ¦, ┆ or │"
+
+" syntastic settings
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim
       call neobundle#begin(expand('~/.vim/bundle/'))
       endif
       " originalrepos on github
-      NeoBundle 'Shougo/neobundle.vim'
-      NeoBundle 'Shougo/vimproc'
-      NeoBundle 'VimClojure'
-      NeoBundle 'Shougo/vimshell'
-      NeoBundle 'Shougo/unite.vim'
-      NeoBundle 'Shougo/neocomplcache'
-      NeoBundle 'Shougo/neosnippet'
-      NeoBundle 'jpalardy/vim-slime'
-      NeoBundle 'scrooloose/syntastic'
-      NeoBundle 'davidhalter/jedi-vim'
+      NeoBundleFetch 'Shougo/neobundle.vim'
+
+      "NeoBundle 'Shougo/vimproc'
+      "NeoBundle 'VimClojure'
+      "NeoBundle 'Shougo/vimshell'
+      "NeoBundle 'Shougo/unite.vim'
+      "NeoBundle 'Shougo/neocomplcache'
+      "NeoBundle 'Shougo/neosnippet'
+      "NeoBundle 'jpalardy/vim-slime'
       NeoBundle 'nathanaelkane/vim-indent-guides'
+      "NeoBundle 'Yggdroot/indentLine'
       NeoBundle 'w0ng/vim-hybrid'
+      NeoBundle 'Flake8-vim'
+      NeoBundle 'davidhalter/jedi-vim'
+      NeoBundle 'hynek/vim-python-pep8-indent'
+      NeoBundle 'Townk/vim-autoclose'
+      NeoBundle 'scrooloose/syntastic'
       NeoBundle 'scrooloose/nerdtree'
-      ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+      "NeoBundle 'klen/python-mode' " python
       call neobundle#end()
 
 """"""""""""""""""""""""""""""
 " 各種オプションの設定
 """"""""""""""""""""""""""""""
+" インストールするか自動でチェック
+NeoBundleCheck
 " タグファイルの指定(でもタグジャンプは使ったことがない)
 set tags=~/.tags
 " スワップファイルは使わない(ときどき面倒な警告が出るだけで役に立ったことがない)
@@ -75,8 +97,6 @@ set showcmd
 set smartcase
 " 検索結果をハイライト表示する
 set hlsearch
-" 暗い背景色に合わせた配色にする
-" set background=dark
 " タブ入力を複数の空白入力に置き換える
 set expandtab
 " 検索ワードの最初の文字を入力した時点で検索を開始する
@@ -103,8 +123,6 @@ set shiftwidth=2
 set smarttab
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
-" 構文毎に文字色を変化させる
-" syntax on
 " カラースキーマの指定
 colorscheme hybrid
 " 行番号の色
@@ -120,6 +138,7 @@ if &term =~ "xterm-256color" || "screen-256color"
               set t_Sb=[4%dm
             endif
 
+" 構文毎に文字色を変化させる
 syntax enable
 hi PmenuSel cterm=reverse ctermfg=33 ctermbg=222 gui=reverse guifg=#3399ff guibg=#f0e68c
 
