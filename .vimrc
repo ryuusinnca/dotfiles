@@ -128,15 +128,17 @@ colorscheme hybrid
 " 行番号の色
 highlight LineNr ctermfg=darkyellow
 
+
+
 if &term =~ "xterm-256color" || "screen-256color"
     set t_Co=256
-      set t_Sf=[3%dm
-        set t_Sb=[4%dm
-      elseif &term =~ "xterm-color"
-          set t_Co=8
-            set t_Sf=[3%dm
-              set t_Sb=[4%dm
-            endif
+    set t_Sf=[3%dm
+    set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+    set t_Co=8
+    set t_Sf=[3%dm
+    set t_Sb=[4%dm
+endif
 
 " 構文毎に文字色を変化させる
 syntax enable
@@ -144,3 +146,4 @@ hi PmenuSel cterm=reverse ctermfg=33 ctermbg=222 gui=reverse guifg=#3399ff guibg
 
 filetype plugin indent on     " required!
 filetype indent on
+
