@@ -52,7 +52,7 @@ if has('vim_starting')
       "NeoBundle 'Shougo/neocomplcache'
       "NeoBundle 'Shougo/neosnippet'
       "NeoBundle 'jpalardy/vim-slime'
-      NeoBundle 'nathanaelkane/vim-indent-guides'
+      "NeoBundle 'nathanaelkane/vim-indent-guides'
       "NeoBundle 'Yggdroot/indentLine'
       NeoBundle 'w0ng/vim-hybrid'
       NeoBundle 'Flake8-vim'
@@ -129,16 +129,6 @@ colorscheme hybrid
 highlight LineNr ctermfg=darkyellow
 
 
-
-if &term =~ "xterm-256color" || "screen-256color"
-    set t_Co=256
-    set t_Sf=[3%dm
-    set t_Sb=[4%dm
-elseif &term =~ "xterm-color"
-    set t_Co=8
-    set t_Sf=[3%dm
-    set t_Sb=[4%dm
-endif
 
 " 構文毎に文字色を変化させる
 syntax enable
